@@ -2,7 +2,7 @@
 	#include "y.tab.h"
 %}
 var [A-Za-z]+[A-Za-z0-9.]*
-valor [1-9]+
+valor [0-9]+
 
 %%
 
@@ -11,7 +11,7 @@ valor [1-9]+
 "<" { return Tmenor; }
 ">" { return Tmaior; }
 "define"	{ return Tdefine; }
-"\""	{ return TAspas; }
+"\""	{ return Taspas; }
 "float"		{ return Tfloat; }
 "int"		{ return Tint; }
 "char"		{ return Tchar; }
@@ -31,6 +31,7 @@ valor [1-9]+
 "["		{ return TabreColchete; }
 "]"		{ return TfechaColchete; }
 "="		{ return Tigual; }
+","		{ return Tvirgula; }
 {var} { return Tvar; }
 {valor} { return Tvalor; }
 [ \n\t] 

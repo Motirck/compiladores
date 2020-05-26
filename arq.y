@@ -7,7 +7,7 @@
 %token Tmenor
 %token Tmaior
 %token Tdefine
-%token TAspas
+%token Taspas
 %token Tfloat
 %token Tint
 %token Tchar
@@ -29,19 +29,22 @@
 %token Tigual
 %token Tvar
 %token Tvalor
+%token Tvirgula
 
 %start inicio
 
 %%
 
 inicio: prog;
-prog: biblioteca | biblioteca2 prog | constante;
-biblioteca: Thashtag Tinclude Tmenor Tvar Tmaior | biblioteca2;
-biblioteca2:  Thashtag Tinclude Tvar;
-constante: const constante | variaveis;
+prog: biblioteca prog | constante;
+biblioteca: Thashtag Tinclude Tmenor Tvar Tmaior | Thashtag Tinclude Taspas Tvar Taspas;
+constante: const constante | AreaVar;
 const: Thashtag Tdefine Tvar Tvalor;
-variaveis: Tvar Tint | Tchar | Tvoid TpontoVirgula
-
+AreaVar: variaveis AreaVar | declararFuncao;  
+variaveis:  TIPO VAR TpontoVirgula; 
+TIPO: Tint | Tchar | Tvoid | Tfloat; 
+VAR: Tvar | Tvar Tvirgula VAR;
+declararFuncao: Tvoid;
 
 %%
 
