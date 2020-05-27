@@ -1,1 +1,1 @@
-# compiladores
+# Trablho da disciplina de Compiladores da Faculdade Única de Ipatinga
