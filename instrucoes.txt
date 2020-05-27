@@ -1,0 +1,10 @@
+flex arq.l (compila o codigo flex)
+
+bison -dy arq.y (compila o codigo bison)
+
+gcc lex.yy.c y.tab.c -o arq.exe (gera executavel)
+
+arq.exe (digite o um codigo em C) ou 
+
+arq.exe < teste2.c (recebe o arquivo com linguagem C).
+
