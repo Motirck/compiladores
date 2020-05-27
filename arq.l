@@ -27,11 +27,13 @@ valor [0-9]+
 ")"		{ return TfechaParenteses; }
 ";"		{ return TpontoVirgula; }
 "{"		{ return TabreChaves; }
-"}"		{ return TFechaChaves; }
+"}"		{ return TfechaChaves; }
 "["		{ return TabreColchete; }
 "]"		{ return TfechaColchete; }
 "="		{ return Tigual; }
 ","		{ return Tvirgula; }
+"%"		{ return Tporcentagem; }
+"1"		{ return Tum; }
 {var} { return Tvar; }
 {valor} { return Tvalor; }
 [ \n\t] 

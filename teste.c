@@ -10,6 +10,11 @@ void limpeza()
     for (int i = 0; i < N; i++)
         notas[i] = 0;
 }
+void limpeza2()
+{
+    for (int i = 0; i < N; i++)
+        notas[i] = 0;
+}
 int main()
 {
     limpeza();

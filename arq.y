@@ -1,5 +1,7 @@
 %{
-	#include<stdio.h>
+   #include <stdio.h>
+   int yylex();
+   int yyerror(const char *s);
 %}
 
 %token Thashtag
@@ -23,13 +25,15 @@
 %token TfechaParenteses
 %token TpontoVirgula
 %token TabreChaves
-%token TFechaChaves
+%token TfechaChaves
 %token TabreColchete
 %token TfechaColchete
 %token Tigual
 %token Tvar
 %token Tvalor
 %token Tvirgula
+%token Tporcentagem
+%token Tum
 
 %start inicio
 
@@ -42,9 +46,18 @@ constante: const constante | AreaVar;
 const: Thashtag Tdefine Tvar Tvalor;
 AreaVar: variaveis AreaVar | declararFuncao;  
 variaveis:  TIPO VAR TpontoVirgula; 
-TIPO: Tint | Tchar | Tvoid | Tfloat; 
-VAR: Tvar | Tvar Tvirgula VAR;
-declararFuncao: Tvoid;
+TIPO: Tint | Tchar | Tfloat; 
+VAR: Tvar | Tvar TabreColchete Tvar TfechaColchete | Tvar TabreColchete Tvalor TfechaColchete |Tvar Tvirgula VAR;
+declararFuncao: Tvoid Tvar TabreParenteses TfechaParenteses TabreChaves corpofuncao;
+corpofuncao: Tfor TabreParenteses TIPO Tvar Tigual Tvalor TpontoVirgula Tvar Tmenor Tvar TpontoVirgula Tvar Tmais Tmais TfechaParenteses corpoFor;
+corpoFor: Tvar TabreColchete Tvar TfechaColchete Tigual Tvalor TpontoVirgula TfechaChaves declararMiasFuncaoOuIrProMain;
+declararMiasFuncaoOuIrProMain: declararFuncao | funcaoMain;
+funcaoMain: TIPO Tmain  TabreParenteses TfechaParenteses TabreChaves corpoFuncaoMain;
+corpoFuncaoMain: Tvar TabreParenteses TfechaParenteses TpontoVirgula corpoFuncaoMain | atribuicao;
+atribuicao: modosAtribuicao atribuicao | finalizaMain;
+modosAtribuicao: Tvar Tigual Tvalor TpontoVirgula |  Tvar Tigual Tvar sinais Tvar TpontoVirgula | Tvar Tigual Tvar sinais Tvalor TpontoVirgula | Tvar Tigual Tvar TpontoVirgula;
+sinais: Tmais | Tvezes | Tdivisao | Tporcentagem | Tmenos;
+finalizaMain: Treturn Tum TpontoVirgula TfechaChaves;
 
 %%
 
@@ -53,14 +66,12 @@ int main(void)
    yyparse();
    return(1);
 }
-
 int yywrap(void)
 {
    return(1);
 }
 
-int yyerror(void)
+int yyerror (char const *s) 
 {
-    printf("Error\n");
-    return(1);
+   fprintf (stderr, "%s\n", s);
 }
