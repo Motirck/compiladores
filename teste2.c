@@ -7,15 +7,10 @@ int a, b, c;
 char d;
 void limpeza()
 {
-    for (float i = 0; i < N; i++)
+    for (int i = 0; i < N; i++)
     {
         notas[i] = 0;
     }
-}
-void limpeza2()
-{
-    for (int i = 0; i < N; i++)
-        notas[i] = 0;
 }
 int main()
 {
